@@ -1,0 +1,16 @@
+---
+import Modal from "../Modal.astro";
+import AsciiBraveArt from "../../assets/svgs/ascii-brave-art.svg";
+---
+
+<Modal id="PopupBrave" title="Brave">
+  <div class="flex flex-col items-center justify-center w-full h-full gap-5">
+    <AsciiBraveArt width={246} height={246} />
+    <form action="https://search.brave.com/search?q=" method="get" target="_blank">
+      <input name="q" autofocus type="text" class="border-1 px-1" >
+      <button type="submit" class="bg-black/70 text-white/75 px-2 h-full rounded-sm">
+        Search
+      </button>
+    </form>
+  </div>
+</Modal>

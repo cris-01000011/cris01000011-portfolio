@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import SystemModal from "../SystemModal.astro";
+import FinalFantasyCover from "../../assets/imgs/ffvii-cover.png"
+
+import PlayIcon from "../../assets/svgs/play-svgrepo-com.svg"
+import PauseIcon from "../../assets/svgs/pause-svgrepo-com.svg"
+---
+
+<SystemModal id="PopupSystemMusic" openDirection="right-5" width="w-auto">
+  <div class="flex items-center w-full h-full">
+    <Image class={"rounded-md"} src={FinalFantasyCover} alt={"FinalFantasyCover"} width={64} height={64} />
+    <div class="flex flex-col gap-2 pl-2">
+      <span>Battle Theme</span>
+      <div class="grid grid-cols-3 flex-1 gap-3">
+        <PlayIcon class={"scale-x-[-1] justify-self-center"} width={24} height={24} />
+        <PauseIcon class={"justify-self-center"} width={24} height={24} />
+        <PlayIcon class={"justify-self-center"} width={24} height={24} />
+      </div>
+    </div>
+  </div>
+</SystemModal>

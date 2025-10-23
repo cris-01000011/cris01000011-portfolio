@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import Modal from "../Modal.astro";
+import tablify from "../../assets/imgs/tablify.png";
+---
+
+<Modal id="PopupFileExplorer" title="File Explorer">
+  <div class="flex gap-5 w-full bg-black/20 text-black/50 px-2 text-sm">
+    <span>File</span>
+    <span>Edit</span>
+    <span>View</span>
+    <span>Help</span>
+    <span>-</span>
+    <span>/home/user/projects/</span>
+  </div>
+
+  <div class="flex flex-row w-full h-full">
+    <div class="flex flex-col w-[20%] h-full border-r-1 border-r-black/20 text-black/50 text-md truncate">
+      <span class="text-sm p-1">Places</span>
+      <span class="hover:bg-black/15 px-2 py-1">Computer</span>
+      <span class="bg-black/15 px-2 py-1">Home</span>
+      <span class="hover:bg-black/15 px-2 py-1">Desktop</span>
+      <span class="hover:bg-black/15 px-2 py-1">Recent</span>
+      <span class="hover:bg-black/15 px-2 py-1">Trash</span>
+      <span class="hover:bg-black/15 px-2 py-1">Documents</span>
+      <span class="hover:bg-black/15 px-2 py-1">Music</span>
+      <span class="hover:bg-black/15 px-2 py-1">Pictures</span>
+      <span class="hover:bg-black/15 px-2 py-1">Downloads</span>
+    </div>
+
+    <div class="relative flex flex-col w-[80%] h-full p-2 text-black/75">
+      <a class="group inline-block p-1" href="https://tablify-lemon.vercel.app/" target="_blank">
+        <span class="group">Tablify.html</span>
+        <div class="hidden group-hover:block absolute top-0 right-0 group-hover:animate-[fade-left_0.2s_linear] p-2">
+          <div class="border-1 border-black/20 text-black/50 p-1">
+            <Image class={"mb-2"} src={tablify} alt={"tablify.png"} width={300} height={300} />
+            <span>Tablify</span>
+            <hr>
+            <div class="text-sm max-w-[300px]">Customizable new tab page — organize your links in folders, add quick-access icons, and use custom search commands.</div>
+          </div>
+        </div>
+      </a>
+      <a class="group inline-block p-1" href="https://tablify-lemon.vercel.app/" target="_blank">
+        <span class="group">Ping pong.html</span>
+        <Image class={"hidden group-hover:block group-hover:animate-[fade-left_0.2s_linear]"} src={tablify} alt={"tablify.png"} width={300} height={300} />
+      </a>
+    </div>
+  </div>
+</Modal>
+
+<style>
+@keyframes fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+</style>

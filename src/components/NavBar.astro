@@ -1,0 +1,73 @@
+---
+import BraveIcon from "../assets/svgs/brave-svgrepo-com.svg";
+import MenuIcon from "../assets/svgs/menu-dots-circle-svgrepo-com.svg";
+import TerminalIcon from "../assets/svgs/terminal-svgrepo-com.svg";
+import MusicIcon from "../assets/svgs/music-note-svgrepo-com.svg";
+import PowerIcon from "../assets/svgs/power-svgrepo-com.svg";
+import BatteryIcon from "../assets/svgs/battery-empty-svgrepo-com.svg";
+import WifiIcon from "../assets/svgs/wifi-svgrepo-com.svg";
+
+import PopupBrave from "./popups/PopupBrave.astro";
+import PopupTerminal from "./popups/PopupTerminal.astro";
+
+import PopupSystemMusic from "./system-popups/PopupSystemMusic.astro";
+import PopupSystemBattery from "./system-popups/PopupSystemBattery.astro";
+import PopupSystemUserActions from "./system-popups/PopupSystemUserActions.astro";
+import PopupSystemApps from "./system-popups/PopupSystemApps.astro";
+import PopupSystemWiFi from "./system-popups/PopupSystemWiFi.astro";
+---
+
+<nav class="fixed bottom-0 w-full h-auto px-5 py-2 z-1">
+  <div class="grid grid-cols-3 items-center justify-center px-1 w-full h-[36px] bg-white/40 border-1 border-black/5 backdrop-blur-[5px] rounded-2xl">
+    <div class="justify-self-start flex items-center gap-2 pl-2">
+      <button onclick="openPopup('PopupSystemUserActions')">
+         <PowerIcon width={24} height={24} />
+      </button>
+    </div>
+    <div class="justify-self-center flex items-center">
+      <button onclick="openPopup('PopupBrave')">
+        <BraveIcon width={28} height={28} />
+      </button>
+      <button class="mx-2" onclick="openPopup('PopupSystemApps')">
+        <MenuIcon width={28} height={28} />
+      </button>
+      <button onclick="openPopup('PopupTerminal')">
+        <TerminalIcon width={28} height={28} />
+      </button>
+    </div>
+    <div class="justify-self-end flex items-center gap-2 pr-2">
+      <button onclick="openPopup('PopupSystemMusic')">
+         <MusicIcon width={28} height={28} />
+      </button>
+      <button onclick="openPopup('PopupSystemBattery')">
+         <BatteryIcon width={28} height={28} />
+      </button>
+      <button onclick="openPopup('PopupSystemWiFi')">
+         <WifiIcon width={28} height={28} />
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  function openPopup(dialogToOpen) {
+    const systemDialogsToClose = document.getElementsByTagName("dialog");
+
+    Array.from(systemDialogsToClose).forEach((dialog) => {
+      if (dialog.id.slice(0, 11) !== "PopupSystem") return;
+
+      dialog.close(dialog.id);
+    });
+
+    document.getElementById(dialogToOpen).show();
+  };
+</script>
+
+<PopupBrave />
+<PopupTerminal />
+
+<PopupSystemMusic />
+<PopupSystemBattery />
+<PopupSystemUserActions />
+<PopupSystemApps />
+<PopupSystemWiFi />

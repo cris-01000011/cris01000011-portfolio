@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --font-big-blue: "BigBlueTerm437NerdFont-Regular", normal;
+}
+
+@font-face {
+  font-family: "BigBlueTerm437NerdFont-Regular";
+  src: url("/fonts/BigBlueTerm437NerdFont-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}

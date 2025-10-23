@@ -1,0 +1,13 @@
+---
+import SystemModal from "../SystemModal.astro";
+
+// function openPopup in: NavBar.astro
+---
+
+<SystemModal id="PopupSystemApps" openDirection="left-[calc(50%-150px)]" width="w-[300px]">
+  <div class="flex flex-col w-full h-full">
+    <button onclick="openPopup('PopupBrave')" class="flex items-start hover:bg-black/5 px-1 py-1 rounded w-full">Brave</button>
+    <button onclick="openPopup('PopupTerminal')" class="flex items-start hover:bg-black/5 px-1 py-1 rounded w-full">Terminal</button>
+    <button onclick="openPopup('PopupFileExplorer')" class="flex items-start hover:bg-black/5 px-1 py-1 rounded w-full">File Explorer</button>
+  </div>
+</SystemModal>

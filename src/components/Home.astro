@@ -1,0 +1,14 @@
+---
+import FolderIcon from "../assets/svgs/folder-favourite-star-svgrepo-com.svg";
+import PopupFileExplorer from "./popups/PopupFileExplorer.astro";
+
+// Function openPopup in: NavBar.astro
+---
+<main class="w-full h-full bg-white/65 p-10">
+  <button onclick="openPopup('PopupFileExplorer')" class="flex flex-col gap-1 items-center w-[86px] cursor-pointer">
+    <FolderIcon width={36} height={36} />
+    <span class="bg-black/10 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">Projects</span>
+  </button>
+</main>
+
+<PopupFileExplorer />
