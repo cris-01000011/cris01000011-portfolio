@@ -1,7 +1,20 @@
 ---
 import { Image } from "astro:assets";
 import Modal from "../Modal.astro";
-import tablify from "../../assets/imgs/tablify.png";
+
+import PinSVG from "../../assets/svgs/pin-svgrepo-com.svg";
+
+import TablifyImage from "../../assets/imgs/tablify.png";
+import PingPongImage from "../../assets/imgs/ping-pong.png";
+import AutoRestockImage from "../../assets/imgs/auto-restock.png";
+import OldPortfolioImage from "../../assets/imgs/old-portfolio.png";
+
+const projects = [
+  {img: TablifyImage, url: "https://tablify-lemon.vercel.app/", name: "Tablify.html", previewTitle: "Tablify", previewDescription: "Customizable new tab page — organize your links in folders, add quick-access icons, and use custom search commands."},
+  {img: PingPongImage, url: "https://ping-pong-nu-azure.vercel.app", name: "Ping-Pong.html", previewTitle: "Ping-Pong", previewDescription: "Clasic ping pong game made in React, with the objetive of improve my abilities programming."},
+  {img: AutoRestockImage, url: "https://auto-restock.vercel.app/", name: "Restock-Automatization.html", previewTitle: "Auto Restock", previewDescription: "Automatization of get products not availables in stock."},
+  {img: OldPortfolioImage, url: "https://my-portfolio-pfky.onrender.com", name: "Old-Portfolio.html", previewTitle: "Old Portfolio", previewDescription: "Shows a basic online store system performing CRUD operations."}
+];
 ---
 
 <Modal id="PopupFileExplorer" title="File Explorer">
@@ -15,7 +28,8 @@ import tablify from "../../assets/imgs/tablify.png";
   </div>
 
   <div class="flex flex-row w-full h-full">
-    <div class="flex flex-col w-[20%] h-full border-r-1 border-r-black/20 text-black/50 text-md truncate">
+    {/* Left Bar */}
+    <div class="bg-black/5 flex flex-col w-[20%] h-full border-r-1 border-r-black/20 text-black/50 text-md truncate">
       <span class="text-sm p-1">Places</span>
       <span class="hover:bg-black/15 px-2 py-1">Computer</span>
       <span class="bg-black/15 px-2 py-1">Home</span>
@@ -28,22 +42,31 @@ import tablify from "../../assets/imgs/tablify.png";
       <span class="hover:bg-black/15 px-2 py-1">Downloads</span>
     </div>
 
-    <div class="relative flex flex-col w-[80%] h-full p-2 text-black/75">
-      <a class="group inline-block p-1" href="https://tablify-lemon.vercel.app/" target="_blank">
-        <span class="group">Tablify.html</span>
-        <div class="hidden group-hover:block absolute top-0 right-0 group-hover:animate-[fade-left_0.2s_linear] p-2">
-          <div class="border-1 border-black/20 text-black/50 p-1">
-            <Image class={"mb-2"} src={tablify} alt={"tablify.png"} width={300} height={300} />
-            <span>Tablify</span>
-            <hr>
-            <div class="text-sm max-w-[300px]">Customizable new tab page — organize your links in folders, add quick-access icons, and use custom search commands.</div>
-          </div>
-        </div>
-      </a>
-      <a class="group inline-block p-1" href="https://tablify-lemon.vercel.app/" target="_blank">
-        <span class="group">Ping pong.html</span>
-        <Image class={"hidden group-hover:block group-hover:animate-[fade-left_0.2s_linear]"} src={tablify} alt={"tablify.png"} width={300} height={300} />
-      </a>
+    <div class="relative w-[80%] h-full p-2 text-black/75">
+
+      {/* Projects */}
+      <div class="w-fit flex flex-col">
+        {projects.map(project => (
+          <a class="group inline-block p-1" href={project.url} target="_blank">
+            <span class="group">{project.name}</span>
+            <div class="hidden group-hover:block absolute top-0 right-0 group-hover:animate-[fade-left_0.2s_linear] p-2">
+              <div class="border-1 border-black/20 text-black/50 p-1">
+                <Image class={"mb-2"} src={project.img} alt={project.img} width={300} height={300} />
+                <span>{project.previewTitle}</span>
+                <hr>
+                <div class="text-sm max-w-[300px]">{project.previewDescription}</div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {/* Bottom Files */}
+      <div class="absolute bottom-11 left-0 flex items-center border-t-1 border-t-black/20 w-full px-2">
+        <PinSVG width={16} height={16} class={"mr-2"}/>
+        <button onclick="openPopup('PopupAboutMe')" class="border-x-1 border-x-black/20 px-2 hover:bg-black/10">About Me.txt</button>
+        <button onclick="openPopup('PopupExperience')" class="border-r-1 border-r-black/20 px-2 hover:bg-black/10">Experience.txt</button>
+      </div>
     </div>
   </div>
 </Modal>
