@@ -2,6 +2,7 @@
 import FolderIcon from "../assets/svgs/folder-favourite-star-svgrepo-com.svg";
 import FileUserIcon from "../assets/svgs/file-user-svgrepo-com.svg";
 import FileCodeIcon from "../assets/svgs/file-code-svgrepo-com.svg";
+import FilePdfIcon from "../assets/svgs/pdf-svgrepo-com.svg";
 
 import PopupFileExplorer from "./popups/PopupFileExplorer.astro";
 import PopupAboutMe from "./popups/PopupAboutMe.astro"
@@ -29,6 +30,17 @@ import PopupExperience from "./popups/PopupExperience.astro"
     <FileUserIcon width={36} height={36} />
     <span class="bg-black/10 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">Experience.txt</span>
   </button>
+
+  <div class="absolute bottom-16 flex flex-row gap-7">
+    <a href="/files/CV_CristopherRamirez_2025_EN.pdf" target="_blank" class="flex flex-col gap-1 items-center w-[125px] cursor-pointer">
+      <FilePdfIcon width={36} height={36} />
+      <span class="bg-black/10 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">CV (EN).pdf</span>
+    </a>
+    <a href="/files/CV_CristopherRamirez_2025.pdf" target="_blank" class="flex flex-col gap-1 items-center w-[125px] cursor-pointer">
+      <FilePdfIcon width={36} height={36} />
+      <span class="bg-black/10 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">CV (ES).pdf</span>
+    </a>
+  </div>
 </main>
 
 <PopupFileExplorer />
