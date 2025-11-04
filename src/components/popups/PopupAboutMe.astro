@@ -1,14 +1,56 @@
 ---
 import Modal from "../Modal.astro";
+import CopySVG from "../../assets/svgs/copy-svgrepo-com.svg";
+import CopiedSVG from "../../assets/svgs/copied-svgrepo-com.svg";
 ---
 
-<Modal id="PopupAboutMe" title="File Reader: About Me.txt" width="w-[calc(100%-40px)] lg:w-[400px]" height="h-[90%] lg:h-[300px]">
+<Modal id="PopupAboutMe" title="File Reader: About Me.txt" width="w-[calc(100%-40px)] lg:w-[500px]" height="h-[90%] lg:h-[370px]">
   <div class="flex flex-col gap-3 text-black/50 p-2">
     <p><b>Area:</b> Web development</p>
     <p><b>Main Stack:</b> React, Astro, Tailwind, ExpresJS</p>
     <p><b>Soft Skills:</b> Self-taught, autonomous, proactivity</p>
+    <p><b>Code Editor:</b> Neovim, NvChad distribution</p>
+    <p><b>Studing:</b> Rust</p>
+    <p><b>Hobbies:</b> Football, retro videogames</p>
+    <hr class="text-black/25">
     <p><b>LinkedIn:</b> <a href="www.linkedin.com/in/cris01000011" class="underline">cris01000011</a></p>
     <p><b>GitHub:</b> <a href="https://github.com/cris-01000011" class="underline">cris-01000011</a></p>
-    <p><b>Email:</b> cris.01000011@gmail.com</p>
+    <p class="flex flex-row items-center gap-2"><b>Email:</b>
+      cris.01000011@gmail.com
+      <button id="copyEmailBtn" type="button" class="active:bg-black/5 rounded"><CopySVG width={24} height={24} /></button>
+      <span hidden id="copySpan" class="animate-copy">Copied!</span>
+    </p>
   </div>
 </Modal>
+
+<style>
+  @keyframes copy {
+    0% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-copy {
+    animation: copy 0.1s linear;
+  }
+</style>
+
+<script is:inline>
+  const btnCopy = document.getElementById("copyEmailBtn");
+  const spanCopied = document.getElementById("copySpan");
+  const email = "cris.01000011@gmail.com";
+
+  btnCopy?.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(email);
+    btnCopy.hidden = true;
+    spanCopied.hidden = false;
+
+    setTimeout(() => {
+      btnCopy.hidden = false;
+      spanCopied.hidden = true;
+    }, 400)
+  });
+</script>
