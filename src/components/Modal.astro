@@ -46,14 +46,14 @@ const { id, title, width="w-[calc(100%-40px)]", height="h-[90%]" } = Astro.props
   const dialogs = document.getElementsByTagName("dialog");
 
   Array.from(dialogs).forEach((dialog) => {
-    const header = dialog.querySelector(".header");
-    const resizeHandle = dialog.querySelector(".resize-handle");
+    const header = dialog.querySelector<HTMLElement>(".header");
+    const resizeHandle = dialog.querySelector<HTMLElement>(".resize-handle");
 
-    if (header) dragElement(dialog, header);
-    if (resizeHandle) makeResizable(dialog, resizeHandle);
+    if (header) dragElement(dialog as HTMLDialogElement, header);
+    if (resizeHandle) makeResizable(dialog as HTMLDialogElement, resizeHandle);
   });
 
-  function dragElement(elmnt, handle) {
+  function dragElement(elmnt: HTMLDialogElement, handle: HTMLElement) {
     let pos1 = 0,
       pos2 = 0,
       pos3 = 0,
@@ -67,7 +67,7 @@ const { id, title, width="w-[calc(100%-40px)]", height="h-[90%]" } = Astro.props
       document.onmousemove = elementDrag;
     };
 
-    function elementDrag(e) {
+    function elementDrag(e: MouseEvent) {
       e.preventDefault();
       pos1 = pos3 - e.clientX;
       pos2 = pos4 - e.clientY;
@@ -83,22 +83,22 @@ const { id, title, width="w-[calc(100%-40px)]", height="h-[90%]" } = Astro.props
     }
   }
 
-  function makeResizable(elmnt, handle) {
-    let startX, startY, startWidth, startHeight;
+  function makeResizable(elmnt: HTMLDialogElement, handle: HTMLElement) {
+    let startX = 0, startY = 0, startWidth = 0, startHeight = 0;
 
     handle.addEventListener("mousedown", initResize);
 
-    function initResize(e) {
+    function initResize(e: MouseEvent) {
       e.preventDefault();
       startX = e.clientX;
       startY = e.clientY;
-      startWidth = parseInt(document.defaultView.getComputedStyle(elmnt).width, 10);
-      startHeight = parseInt(document.defaultView.getComputedStyle(elmnt).height, 10);
+      startWidth = parseInt(document.defaultView?.getComputedStyle(elmnt).width || "0", 10);
+      startHeight = parseInt(document.defaultView?.getComputedStyle(elmnt).height || "0", 10);
       document.addEventListener("mousemove", resizeDialog);
       document.addEventListener("mouseup", stopResize);
     }
 
-    function resizeDialog(e) {
+    function resizeDialog(e: MouseEvent) {
       elmnt.style.width = startWidth + (e.clientX - startX) + "px";
       elmnt.style.height = startHeight + (e.clientY - startY) + "px";
     }
@@ -109,4 +109,3 @@ const { id, title, width="w-[calc(100%-40px)]", height="h-[90%]" } = Astro.props
     }
   }
 </script>
-
