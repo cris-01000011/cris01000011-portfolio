@@ -10,10 +10,34 @@ import AutoRestockImage from "../../assets/imgs/auto-restock.png";
 import OldPortfolioImage from "../../assets/imgs/old-portfolio.png";
 
 const projects = [
-  {img: TablifyImage, url: "https://tablify-lemon.vercel.app/", name: "Tablify.html", previewTitle: "Tablify", previewDescription: "Customizable new tab page — organize your links in folders, add quick-access icons, and use custom search commands."},
-  {img: PingPongImage, url: "https://ping-pong-nu-azure.vercel.app", name: "Ping-Pong.html", previewTitle: "Ping-Pong", previewDescription: "Clasic ping pong game made in React, with the objetive of improve my abilities programming."},
-  {img: AutoRestockImage, url: "https://auto-restock.vercel.app/", name: "Restock-Automatization.html", previewTitle: "Auto Restock", previewDescription: "Automatization of get products not availables in stock."},
-  {img: OldPortfolioImage, url: "https://my-portfolio-pfky.onrender.com", name: "CRUD.html", previewTitle: "Old Portfolio", previewDescription: "Shows a basic online store system performing CRUD operations."}
+  {
+    img: TablifyImage,
+    url: "https://github.com/cris-01000011/Tablify",
+    name: "Tablify.html",
+    previewTitle: "Tablify",
+    previewDescription: "Customizable new tab page — organize your links in folders, add quick-access icons, and use custom search commands.",
+  },
+  {
+    img: PingPongImage,
+    url: "https://ping-pong-nu-azure.vercel.app",
+    name: "Ping-Pong.html",
+    previewTitle: "Ping-Pong",
+    previewDescription: "Clasic ping pong game made in React, with the objetive of improve my abilities programming.",
+  },
+  {
+    img: AutoRestockImage,
+    url: "https://auto-restock.vercel.app/",
+    name: "Auto-Restock.html",
+    previewTitle: "Technical Test",
+    previewDescription: "Automatization of get products not availables in stock.",
+  },
+  {
+    img: OldPortfolioImage,
+    url: "https://my-portfolio-pfky.onrender.com",
+    name: "CRUD.html",
+    previewTitle: "Old Portfolio",
+    previewDescription: "Shows a basic online store system performing CRUD operations.",
+  }
 ];
 ---
 
@@ -47,8 +71,10 @@ const projects = [
       {/* Projects */}
       <div class="w-fit flex flex-col">
         {projects.map(project => (
-          <a class="group inline-block p-1" href={project.url} target="_blank">
-            <span class="group">{project.name}</span>
+          <a class="group inline-block p-1 w-fit" href={project.url} target="_blank">
+            <span class="group flex flex-row items-center gap-2">
+              {project.name}
+            </span>
             <div class="hidden group-hover:block absolute top-0 right-0 group-hover:animate-[fade-left_0.2s_linear] p-2">
               <div class="border-1 border-black/20 text-black/50 p-1">
                 <Image class={"mb-2"} src={project.img} alt={project.name} width={300} height={300} />
