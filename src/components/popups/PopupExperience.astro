@@ -2,18 +2,54 @@
 import Modal from "../Modal.astro";
 ---
 
-<Modal id="PopupExperience" title="File Reader: Experience.txt" width="w-[calc(100%-40px)] lg:w-[400px]" height="h-[90%] lg:h-[430px]">
-  <div class="flex flex-col gap-3 text-black/50 p-2">
-    <p><b>Position:</b> Web Developer (Professional Internship)</p>
-    <p>
-      Developed a web platform with user authentication for managing nationwide sales points. 
-      The system allowed visualization and administration of locations through an interactive map 
-      with advanced features such as filters and geographic zone delimitation.
-    </p>
-    <p>
-      Additionally, collaborated on inventory management and hardware maintenance tasks.
-      This project significantly improved geographic data visualization and supported 
-      strategic decision-making within the organization.
-    </p>
+<Modal
+  id="PopupExperience"
+  title="File Reader: Experience.pdf"
+  width="w-full lg:w-[550px]"
+  height="h-full lg:h-[460px]"
+  direction="lg:top-1/2 lg:left-1/2 lg:-translate-1/2"
+>
+  <div class="flex flex-col gap-5 px-6 py-5 text-[#cdd6f4] font-[Inter,sans-serif]">
+
+    <!-- Header -->
+    <div class="text-center">
+      <h2 class="text-xl font-semibold text-[#b4befe]">Professional Experience</h2>
+      <p class="text-sm text-[#a6adc8]">Technician in Programming and Web Design</p>
+    </div>
+
+    <hr class="border-[#585b70] opacity-60" />
+
+    <!-- Kingo Energy -->
+    <div class="space-y-2">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <h3 class="font-semibold text-[#b4befe] text-base">Web Developer</h3>
+        <p class="text-xs text-[#a6adc8]">(Professional Internship – 6 months)</p>
+      </div>
+      <p class="text-sm text-[#cdd6f4] leading-relaxed">
+        <span class="font-medium text-[#b4befe]">Kingo Energy —</span>
+        <span>I developed a web platform for the management of points of sale nationwide, significantly improving the visualization of geographic data and strategic decision making within the organization. In addition, I collaborated in inventory and maintenance of company equipment.</span>
+      </p>
+      <div class="text-xs text-[#a6adc8]">
+        Stack: ReactJS · NodeJS (ExpressJS) · MySQL · TailwindCSS
+      </div>
+    </div>
+
+    <hr class="border-[#585b70] opacity-40" />
+
+    <!-- SigmaConsultores -->
+    <div class="space-y-2">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <h3 class="font-semibold text-[#b4befe] text-base">Lead Developer</h3>
+        <p class="text-xs text-[#a6adc8]">(Client Project)</p>
+      </div>
+      <p class="text-sm text-[#cdd6f4] leading-relaxed">
+        <span class="font-medium text-[#b4befe]">Sigmaconsultores —</span>
+        <span>I led the development of a website that offered professional certifications and industrial safety products to companies.</span>
+        <div class="text-xs text-[#a6adc8]">
+          Stack: PHP · MySQL · TailwindCSS
+        </div>
+      </p>
+    </div>
   </div>
 </Modal>
+

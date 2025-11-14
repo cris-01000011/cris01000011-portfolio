@@ -1,13 +1,31 @@
 ---
 import SystemModal from "../SystemModal.astro";
 
-// function openPopup in: NavBar.astro
+import BraveIcon from "../../assets/svgs/brave-svgrepo-com.svg";
+import TerminalIcon from "../../assets/svgs/terminal-svgrepo-com.svg";
+import FolderIcon from "../../assets/svgs/folder-2-svgrepo-com.svg";
+import DesktopIcon from "../../assets/svgs/desktop-svgrepo-com.svg";
 ---
 
-<SystemModal id="PopupSystemApps" openDirection="left-[calc(50%-150px)]" width="w-[300px]">
-  <div class="flex flex-col w-full h-full">
-    <button onclick="openPopup('PopupBrave')" class="flex items-start hover:bg-black/5 px-1 py-1 rounded w-full">Brave</button>
-    <button onclick="openPopup('PopupTerminal')" class="flex items-start hover:bg-black/5 px-1 py-1 rounded w-full">Terminal</button>
-    <button onclick="openPopup('PopupFileExplorer')" class="flex items-start hover:bg-black/5 px-1 py-1 rounded w-full">File Explorer</button>
+<SystemModal id="PopupSystemApps" openDirection="top-1/2 left-1/2 -translate-1/2" width="w-[300px]" background="bg-black/25">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col pr-1 w-full h-full text-[#bac2de]">
+      <button onclick="openPopup('PopupBrave')" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+        <BraveIcon width={24} height={24} />
+        Brave
+      </button>
+      <button onclick="openPopup('PopupTerminal')" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+        <TerminalIcon width={24} height={24} />
+        Terminal
+      </button>
+      <button onclick="openPopup('PopupFileExplorer')" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+        <FolderIcon width={24} height={24} />
+        File Explorer
+      </button>
+      <button onclick="openPopup('PopupDesktop')" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+        <DesktopIcon width={24} height={24} />
+        Desktop
+      </button>
+    </div>
   </div>
 </SystemModal>

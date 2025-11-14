@@ -1,10 +1,153 @@
 ---
+import LockScreen from "../components/LockScreen.astro";
+import PowerOff from "../components/PowerOff.astro";
 import Home from '../components/Home.astro';
+import HomeSmallScreen from '../components/small-screens/HomeScreen.astro';
 import NavBar from '../components/NavBar.astro'
+import TopNavBar from '../components/TopNavBar.astro'
+import StatusBar from '../components/small-screens/StatusBar.astro'
 import Layout from '../layouts/Layout.astro';
+
+import PopupFileExplorer from "../components/popups/PopupFileExplorer.astro";
+import PopupDesktop from "../components/popups/PopupDesktop.astro";
+import PopupAboutMe from "../components/popups/PopupAboutMe.astro";
+import PopupExperience from "../components/popups/PopupExperience.astro";
+import PopupBrave from "../components/popups/PopupBrave.astro";
+import PopupTerminal from "../components/popups/PopupTerminal.astro";
+
+import PopupSystemMusic from "../components/system-popups/PopupSystemMusic.astro";
+import PopupSystemBattery from "../components/system-popups/PopupSystemBattery.astro";
+import PopupSystemUserActions from "../components/system-popups/PopupSystemUserActions.astro";
+import PopupSystemApps from "../components/system-popups/PopupSystemApps.astro";
+import PopupSystemWiFi from "../components/system-popups/PopupSystemWiFi.astro";
+import PopupSystemBluetooth from "../components/system-popups/PopupSystemBluetooth.astro";
+import PopupSystemAboutMe from "../components/system-popups/PopupSystemAboutMe.astro";
 ---
 
 <Layout>
+  <div class="fixed top-0 left-0 w-screen h-screen">
+    <img
+      id="bgImg"
+      class="w-full h-full object-cover select-none"
+      src="/imgs/wallpapers/astronaut.png"
+      alt="bg"
+      draggable="false"
+    >
+  </div>
+  <div hidden id="bgGif" class="fixed top-0 left-0 w-screen h-screen">
+    <img
+      class="w-full h-full object-cover select-none"
+      src="/imgs/bgGif.gif"
+      alt="bg"
+      draggable="false"
+    >
+  </div>
+
+  <PowerOff />
+  <LockScreen />
+  <TopNavBar />
+  <StatusBar />
   <Home />
+  <HomeSmallScreen />
   <NavBar />
+
+  <PopupTerminal />
+  <PopupDesktop />
+  <PopupFileExplorer />
+  <PopupAboutMe />
+  <PopupExperience />
+  <PopupBrave />
+
+  <PopupSystemMusic />
+  <PopupSystemBattery />
+  <PopupSystemUserActions />
+  <PopupSystemApps />
+  <PopupSystemWiFi />
+  <PopupSystemBluetooth />
+  <PopupSystemAboutMe />
 </Layout>
+
+{/* popups: rezise and draggables */}
+<script is:inline>
+  window.addEventListener("mousemove", (e) => {
+    const bodyRectHeight = document.body.getBoundingClientRect().height;
+    const navBottom = document.getElementById("navBottom");
+
+    if (navBottom.classList.contains("animate-jump-top-in") && e.clientY > (bodyRectHeight - 52))
+      return;
+
+    if (e.clientY > (bodyRectHeight - 5))
+      return navBottomChangeAnimation(false);
+
+    if (!navBottom.classList.contains("animate-jump-bottom-out"))
+      return checkOpenPopups();
+  });
+  
+  const dialogs = document.getElementsByTagName("dialog");
+
+  Array.from(dialogs).forEach((dialog) => {
+    const header = dialog.querySelector(".header");
+    const resizeHandle = dialog.querySelector(".resize-handle");
+
+    if (header) dragElement(dialog, header);
+    if (resizeHandle) makeResizable(dialog, resizeHandle);
+  });
+
+  function dragElement(elmnt, handle) {
+    let pos1 = 0,
+      pos2 = 0,
+      pos3 = 0,
+      pos4 = 0;
+
+    handle.onmousedown = (e) => {
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+    };
+
+    function elementDrag(e) {
+      e.preventDefault();
+      checkOpenPopups();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+      elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+    }
+
+    function closeDragElement() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+
+  function makeResizable(elmnt, handle) {
+    let startX = 0, startY = 0, startWidth = 0, startHeight = 0;
+
+    handle.addEventListener("mousedown", initResize);
+
+    function initResize(e) {
+      e.preventDefault();
+      startX = e.clientX;
+      startY = e.clientY;
+      startWidth = parseInt(document.defaultView?.getComputedStyle(elmnt).width || "0", 10);
+      startHeight = parseInt(document.defaultView?.getComputedStyle(elmnt).height || "0", 10);
+      document.addEventListener("mousemove", resizeDialog);
+      document.addEventListener("mouseup", stopResize);
+    }
+
+    function resizeDialog(e) {
+      checkOpenPopups();
+      elmnt.style.width = startWidth + (e.clientX - startX) + "px";
+      elmnt.style.height = startHeight + (e.clientY - startY) + "px";
+    }
+
+    function stopResize() {
+      document.removeEventListener("mousemove", resizeDialog);
+      document.removeEventListener("mouseup", stopResize);
+    }
+  }
+</script>

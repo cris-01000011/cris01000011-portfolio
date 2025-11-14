@@ -2,6 +2,7 @@
 
 @theme {
   --font-big-blue: "BigBlueTerm437NerdFont-Regular", normal;
+  --font-jet-brains: "JetBrainsMonoNerdFont-Regular", normal;
 }
 
 @font-face {
@@ -9,4 +10,22 @@
   src: url("/fonts/BigBlueTerm437NerdFont-Regular.ttf");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "JetBrainsMonoNerdFont-Regular";
+  src: url("/fonts/JetBrainsMono/JetBrainsMonoNerdFont-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scroll-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

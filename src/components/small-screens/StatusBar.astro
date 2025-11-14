@@ -1,0 +1,22 @@
+---
+import VolumeMaxSVG from "../../assets/svgs/volume-max-svgrepo-com.svg";
+import WifiSVG from "../../assets/svgs/wifi-svgrepo-com.svg";
+import BluetoothSVG from "../../assets/svgs/bluetooth-svgrepo-com.svg";
+---
+
+<nav class="lg:hidden fixed top-0 grid grid-cols-2 bg-black/75 w-full backdrop-blur-xl text-sm text-[#cdd6f4]">
+  <div class="flex items-center gap-2 w-full h-full">
+    <button onclick="openPopup('PopupSystemMusic')" class="bg-[#45475a] w-fit ml-1 px-5 py-[2px] rounded">
+      <VolumeMaxSVG width={12} height={12} />
+    </button>
+  </div>
+
+  <div class="flex flex-row gap-2 items-center justify-end w-full py-[2px] pr-1">
+    <button class="flex items-center gap-2 bg-[#89b4fa] w-fit px-5 py-[2px] rounded">
+      <BluetoothSVG width={12} height={12} />
+    </button>
+    <button class="flex items-center gap-2 bg-[#94e2d5] w-fit px-5 py-[2px] rounded">
+      <WifiSVG width={12} height={12} />
+    </button>
+  </div>
+</nav>

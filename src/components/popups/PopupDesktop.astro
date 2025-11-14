@@ -1,0 +1,116 @@
+---
+import { Image } from "astro:assets";
+import Bg1 from "../../assets/imgs/wallpapers/astronaut.png";
+import Bg2 from "../../assets/imgs/wallpapers/black-hole.png";
+import Bg3 from "../../assets/imgs/wallpapers/koi.jpg";
+import Bg4 from "../../assets/imgs/wallpapers/biking-sunset.jpg";
+import Bg5 from "../../assets/imgs/wallpapers/blue-flowers.jpg";
+import Bg6 from "../../assets/imgs/wallpapers/cabin.png";
+import Bg7 from "../../assets/imgs/wallpapers/city-harbor.png";
+import Bg8 from "../../assets/imgs/wallpapers/cold-alley.png";
+import Bg9 from "../../assets/imgs/wallpapers/cottages-river.png";
+import Bg10 from "../../assets/imgs/wallpapers/dominik-mayer-17.jpg";
+import Bg11 from "../../assets/imgs/wallpapers/greenbus.jpg";
+import Bg12 from "../../assets/imgs/wallpapers/sakura-gate.jpg";
+import Bg13 from "../../assets/imgs/wallpapers/snowy-map.png";
+import Bg14 from "../../assets/imgs/wallpapers/cold-alley.png";
+import Bg15 from "../../assets/imgs/wallpapers/chess-gate.jpeg";
+
+import Modal from "../Modal.astro";
+---
+
+<Modal id="PopupDesktop" title="Desktop" width="w-full lg:w-1/2" height="h-full lg:h-1/2" direction="top-0 left-0 lg:top-1/2 lg:left-1/2 lg:-translate-1/2" >
+  <div class="text-center my-3">
+    <span class="text-xl">Wallpapers</span>
+  </div>
+
+  <div class="flex flex-wrap justify-center gap-2 w-full max-h-full overflow-y-auto scroll-hide px-5 pb-26">
+
+    <button onclick="changeBackground('astronaut.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg1} alt="bg1" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('black-hole.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg2} alt="bg2" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('koi.jpg')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg3} alt="bg3" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('biking-sunset.jpg')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg4} alt="bg4" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('blue-flowers.jpg')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg5} alt="bg5" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('cabin.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg6} alt="bg6" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('city-harbor.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg7} alt="bg7" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('cold-alley.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg8} alt="bg8" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('cottages-river.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg9} alt="bg9" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('dominik-mayer-17.jpg')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg10} alt="bg10" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('greenbus.jpg')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg11} alt="bg11" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('sakura-gate.jpg')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg12} alt="bg12" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('snowy-map.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg13} alt="bg13" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('cold-alley.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg14} alt="bg14" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+    <button onclick="changeBackground('chess-gate.png')" class="item-scroll w-50 min-h-40 max-h-40 border-1 border-[#89b4fa] rounded-xl">
+      <Image src={Bg15} alt="bg14" class="w-full h-full object-cover rounded-xl" />
+    </button>
+
+  </div>
+</Modal>
+
+<style>
+@keyframes appear {
+from {
+  opacity: 0;
+  scale: 0.5;
+}
+to {
+  opacity: 1;
+  scale: 1;
+}
+}
+
+.item-scroll {
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
+}
+</style>
+
+<script is:inline>
+function changeBackground(newBg) {
+  const bgImg = document.getElementById("bgImg");
+  bgImg.src = "/imgs/wallpapers/" + newBg;
+}
+</script>

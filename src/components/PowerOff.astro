@@ -1,0 +1,39 @@
+<div id="powerOff" hidden onclick="powerOff()" class="z-3 fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black">
+  <div class="animate-tv bg-white w-full h-52"></div>
+  <div class="animate-fade-msg absolute top-1/2 left-1/2 -translate-1/2 text-[#a6adc8]">Click screen</div>
+</div>
+
+<style>
+@keyframes tv {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+.animate-tv {
+  animation: tv 0.2s ease forwards;
+}
+
+@keyframes fade-msg {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-msg {
+  animation: fade-msg 5s ease;
+}
+</style>
+
+<script is:inline>
+function powerOff() {
+  const powerOff = document.getElementById("powerOff");
+  powerOff.hidden = true;
+}
+</script>

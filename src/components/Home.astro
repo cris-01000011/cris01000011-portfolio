@@ -1,74 +1,33 @@
 ---
 import FolderIcon from "../assets/svgs/folder-favourite-star-svgrepo-com.svg";
 import FileUserIcon from "../assets/svgs/file-user-svgrepo-com.svg";
-import FileCodeIcon from "../assets/svgs/file-code-svgrepo-com.svg";
 import FilePdfIcon from "../assets/svgs/pdf-svgrepo-com.svg";
-
-import PopupFileExplorer from "./popups/PopupFileExplorer.astro";
-import PopupAboutMe from "./popups/PopupAboutMe.astro"
-import PopupExperience from "./popups/PopupExperience.astro"
-
-// Function openPopup in: NavBar.astro
 ---
-<main class="w-full h-full bg-white/65 flex flex-col gap-7 p-10">
-  <div class="flex flex-row gap-7">
-    <button onclick="openPopup('PopupFileExplorer')" class="flex flex-col gap-1 items-center w-[125px] cursor-pointer">
+
+<main class="hidden lg:block">
+  <div class="fixed top-10 left-10">
+    <button onclick="openPopup('PopupFileExplorer')" class="bg-[#11111b90] backdrop-blur-xs hover:backdrop-blur-sm transition-all duration-500 rounded-xl flex flex-col gap-1 items-center px-3 py-1 cursor-pointer">
       <FolderIcon width={36} height={36} />
-      <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">Projects</span>
-    </button>
-    <a href="/files/CV_CristopherRamirez_2025_EN.pdf" target="_blank" class="hidden lg:flex flex-col gap-1 items-center w-[125px] cursor-pointer">
-      <FilePdfIcon width={36} height={36} />
-      <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">CV (EN).pdf</span>
-    </a>
-    <a href="/files/CV_CristopherRamirez_2025.pdf" target="_blank" class="hidden lg:flex flex-col gap-1 items-center w-[125px] cursor-pointer">
-      <FilePdfIcon width={36} height={36} />
-      <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">CV (ES).pdf</span>
-    </a>
-
-    <button onclick="toggleBackgroundAnimation()" class="flex lg:hidden flex-col gap-1 items-center w-[125px] cursor-pointer">
-      <FileCodeIcon width={36} height={36} />
-      <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">animate.sh</span>
+      <span class="px-2 rounded-xl text-sm text-[#cdd6f4] text-center w-full truncate">Projects</span>
     </button>
   </div>
 
-  <div class="flex flex-row gap-7">
-    <button onclick="openPopup('PopupAboutMe')" class="flex flex-col gap-1 items-center w-[125px] cursor-pointer">
+  <div class="fixed top-10 right-10 flex flex-col gap-4 justify-end w-30">
+    <button onclick="openPopup('PopupAboutMe')" class="bg-[#11111b90] backdrop-blur-xs hover:backdrop-blur-sm transition-all duration-500 rounded-xl flex flex-col gap-1 items-center px-3 py-1 cursor-pointer">
       <FileUserIcon width={36} height={36} />
-      <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">About Me.txt</span>
+      <span class="px-2 rounded-xl text-sm text-[#cdd6f4] text-center w-full truncate">About Me.pdf</span>
     </button>
-    <button onclick="toggleBackgroundAnimation()" class="hidden lg:flex flex-col gap-1 items-center w-[125px] cursor-pointer">
-      <FileCodeIcon width={36} height={36} />
-      <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">animate.sh</span>
+    <button onclick="openPopup('PopupExperience')" class="bg-[#11111b90] backdrop-blur-xs hover:backdrop-blur-sm transition-all duration-500 rounded-xl flex flex-col gap-1 items-center px-3 py-1 cursor-pointer">
+      <FileUserIcon width={36} height={36} />
+      <span class="px-2 rounded-xl text-sm text-[#cdd6f4] text-center w-full truncate">Experience.pdf</span>
     </button>
+    <a href="/files/CV_CristopherRamirez_2025_EN.pdf" target="_blank" class="bg-[#11111b90] backdrop-blur-xs hover:backdrop-blur-sm transition-all duration-500 rounded-xl flex flex-col gap-1 items-center px-3 py-1 cursor-pointer">
+      <FilePdfIcon width={36} height={36} />
+      <span class="px-2 rounded-xl text-sm text-[#cdd6f4] text-center w-full truncate">CV (EN).pdf</span>
+    </a>
+    <a href="/files/CV_CristopherRamirez_2025.pdf" target="_blank" class="bg-[#11111b90] backdrop-blur-xs hover:backdrop-blur-sm transition-all duration-500 rounded-xl flex flex-col gap-1 items-center px-3 py-1 cursor-pointer">
+      <FilePdfIcon width={36} height={36} />
+      <span class="px-2 rounded-xl text-sm text-[#cdd6f4] text-center w-full truncate">CV (ES).pdf</span>
+    </a>
   </div>
-
-  <button onclick="openPopup('PopupExperience')" class="flex flex-col gap-1 items-center w-[125px] cursor-pointer">
-    <FileUserIcon width={36} height={36} />
-    <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">Experience.txt</span>
-  </button>
-
-  <a href="/files/CV_CristopherRamirez_2025_EN.pdf" target="_blank" class="flex lg:hidden flex-col gap-1 items-center w-[125px] cursor-pointer">
-    <FilePdfIcon width={36} height={36} />
-    <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">CV (EN).pdf</span>
-  </a>
-  <a href="/files/CV_CristopherRamirez_2025.pdf" target="_blank" class="flex lg:hidden flex-col gap-1 items-center w-[125px] cursor-pointer">
-    <FilePdfIcon width={36} height={36} />
-    <span class="bg-black/5 backdrop-blur-2xl px-2 rounded-xl text-sm text-black/50 text-center w-full truncate">CV (ES).pdf</span>
-  </a>
-
-  </main>
-
-<PopupFileExplorer />
-<PopupAboutMe />
-<PopupExperience />
-
-<script is:inline>
-document.body.style.backgroundImage = "url(/imgs/ff.gif)";
-
-function toggleBackgroundAnimation() {
-  if (document.body.style.backgroundImage.includes("ff.png"))
-    return document.body.style.backgroundImage = "url(/imgs/ff.gif)";
-
-  document.body.style.backgroundImage = "url(/imgs/ff.png)";
-}
-</script>
+</main>

@@ -1,9 +1,26 @@
 ---
 import SystemModal from "../SystemModal.astro";
+
+import WiFiSVG from "../../assets/svgs/wifi-2-svgrepo-com.svg";
 ---
 
-<SystemModal id="PopupSystemWiFi" openDirection="right-5" width="w-auto">
-  <div class="flex items-center w-full h-full">
-    Wi-Fi 5G
+<SystemModal id="PopupSystemWiFi" openDirection="top-8 right-2" width="w-auto">
+  <div
+    class="relative flex items-center gap-3 px-3 py-1 rounded-2xl group">
+
+    <div class="flex flex-col items-center justify-center w-6 h-6">
+      <div class="w-2 h-2 bg-[#a6e3a1] rounded-full animate-pulse"></div>
+      <div class="absolute w-5 h-5 rounded-full border border-[#a6e3a1]/40 opacity-0 group-hover:opacity-100 animate-[ping_2s_ease-in-out_infinite]"></div>
+    </div>
+
+    <div class="flex flex-col">
+      <span class="text-[#cdd6f4] font-medium text-sm">Wi-Fi 5G</span>
+      <span class="text-[#a6adc8] text-xs opacity-80">On</span>
+    </div>
+
+    <div class="ml-5 flex items-center justify-center w-8 h-8 rounded-md">
+      <WiFiSVG width={24} height={24} />
+    </div>
   </div>
 </SystemModal>
+

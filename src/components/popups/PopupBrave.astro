@@ -1,18 +1,28 @@
 ---
 import { Image } from "astro:assets";
+import TablifyImage from "../../assets/imgs/wallpapers/bunnies-road.png";
 
 import Modal from "../Modal.astro";
-import AsciiBraveArt from "../../assets/imgs/ascii-brave-art.png";
+import NavBar from "../tablify-demo/NavBar.astro";
+import QuickAccess from "../tablify-demo/QuickAccess.astro";
+import PopupFolder from "../tablify-demo/PopupFolder.astro";
 ---
 
 <Modal id="PopupBrave" title="Brave">
-  <div class="flex flex-col items-center justify-center w-full h-full gap-5">
-    <Image src={AsciiBraveArt} alt={"AsciiBraveArt.png"} width={246} height={246} class={"w-[150px] lg:w-[246px]"} />
-    <form action="https://search.brave.com/search?q=" method="get" target="_blank">
-      <input name="q" autofocus type="text" class="border-1 px-1" >
-      <button type="submit" class="bg-black/70 text-white/75 px-2 h-full rounded-sm">
-        Search
-      </button>
-    </form>
+  <div class="relative font-big-blue w-full h-full px-2 pt-2 pb-20">
+    <NavBar />
+    <div class="grid grid-cols-3 gap-2 w-full h-full mt-2">
+      <div class="lg:col-span-2 border-2 border-[rgba(49,50,68,0.9)] w-full h-full rounded-2xl">
+        <Image class={"w-full h-full object-cover rounded-2xl"} src={TablifyImage} alt={"tablify-img"} />
+      </div>
+
+      <QuickAccess />
+    </div>
+
+    <div class="absolute bottom-12 right-5 bg-[rgba(49,50,68,0.5)] text-sm rounded-2xl px-3">
+      Tablify Demo
+    </div>
+
+    <PopupFolder />
   </div>
 </Modal>

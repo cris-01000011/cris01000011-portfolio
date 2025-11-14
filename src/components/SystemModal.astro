@@ -1,34 +1,70 @@
 ---
-const { id, openDirection, width = "w-auto" } = Astro.props;
+const { id, openDirection, width = "w-auto", background = "bg-none" } = Astro.props;
 ---
-<dialog id={id} class="text-black/50">
+<dialog id={id} class="text-[#b4befe]">
   <div
-    class="fixed top-0 left-0 w-full h-full z-0"
-    onclick="this.parentElement.close()"
+    class={`fixed top-0 left-0 w-full h-full z-0 ${background}`}
+    onclick="closeSystemPopup(this)"
   ></div>
 
-  <div class={`animate-fade fixed bottom-[calc(48px)] ${openDirection} ${width} h-auto p-2 bg-white/40 border-1 border-black/5 backdrop-blur-[5px] shadow-md rounded-xl`}>
+  <div class={`popup-content animate-open fixed ${openDirection} ${width} h-auto p-2 bg-[rgba(17,17,27,0.9)] backdrop-blur-sm border-1 border-[#cba6f7] rounded-xl`}>
     <slot />
   </div>
 </dialog>
 
 <style>
-  @keyframes fade {
+  @keyframes open {
     from {
       opacity: 0;
-      transform: translateY(50px);
+      transform: scale(0);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1);
     }
   }
 
-  .animate-fade {
-    animation: fade 0.25s linear;
+  @keyframes close {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+
+  .animate-open {
+    animation: open 0.1s linear;
+  }
+
+  .animate-close {
+    animation: close 0.2s ease;
   }
 
   dialog::backdrop {
     background: transparent;
   }
 </style>
+
+<script is:inline>
+  function closeSystemPopup(overlay) {
+    const dialog = overlay.closest("dialog");
+    const content = dialog.querySelector(".popup-content");
+
+    content.classList.remove("animate-open");
+    content.classList.add("animate-close");
+
+    content.addEventListener(
+      "animationend",
+      () => {
+        dialog.close();
+        content.classList.remove("animate-close");
+        content.classList.add("animate-open");
+      },
+      { once: true }
+    );
+  }
+</script>
+

@@ -1,56 +1,64 @@
 ---
 import BraveIcon from "../assets/svgs/brave-svgrepo-com.svg";
-import MenuIcon from "../assets/svgs/menu-dots-circle-svgrepo-com.svg";
 import TerminalIcon from "../assets/svgs/terminal-svgrepo-com.svg";
-import MusicIcon from "../assets/svgs/music-note-svgrepo-com.svg";
-import PowerIcon from "../assets/svgs/power-svgrepo-com.svg";
-import BatteryIcon from "../assets/svgs/battery-empty-svgrepo-com.svg";
-import WifiIcon from "../assets/svgs/wifi-svgrepo-com.svg";
-
-import PopupBrave from "./popups/PopupBrave.astro";
-import PopupTerminal from "./popups/PopupTerminal.astro";
-
-import PopupSystemMusic from "./system-popups/PopupSystemMusic.astro";
-import PopupSystemBattery from "./system-popups/PopupSystemBattery.astro";
-import PopupSystemUserActions from "./system-popups/PopupSystemUserActions.astro";
-import PopupSystemApps from "./system-popups/PopupSystemApps.astro";
-import PopupSystemWiFi from "./system-popups/PopupSystemWiFi.astro";
+import FolderIcon from "../assets/svgs/folder-2-svgrepo-com.svg";
 ---
 
-<nav class="fixed bottom-0 w-full h-auto px-5 py-2 z-1">
-  <div class="grid grid-cols-3 items-center justify-center px-1 w-full h-[36px] bg-white/40 border-1 border-black/5 backdrop-blur-[5px] rounded-2xl">
-    <div class="justify-self-start flex items-center gap-2 pl-2">
-      <button onclick="openPopup('PopupSystemUserActions')">
-         <PowerIcon width={24} height={24} />
-      </button>
-    </div>
-    <div class="justify-self-center flex items-center">
-      <button onclick="openPopup('PopupBrave')">
-        <BraveIcon width={28} height={28} />
-      </button>
-      <button class="mx-2" onclick="openPopup('PopupSystemApps')">
-        <MenuIcon width={28} height={28} />
-      </button>
-      <button onclick="openPopup('PopupTerminal')">
-        <TerminalIcon width={28} height={28} />
-      </button>
-    </div>
-    <div class="justify-self-end flex items-center gap-2 pr-2">
-      <button onclick="openPopup('PopupSystemMusic')">
-         <MusicIcon width={28} height={28} />
-      </button>
-      <button onclick="openPopup('PopupSystemBattery')">
-         <BatteryIcon width={28} height={28} />
-      </button>
-      <button onclick="openPopup('PopupSystemWiFi')">
-         <WifiIcon width={28} height={28} />
-      </button>
-    </div>
+<nav id="navBottom" class="hidden z-1 fixed bottom-2 left-1/2 -translate-x-1/2 animate-jump-top-in lg:flex items-center justify-center px-5 py-4 w-fit h-[36px] bg-[#11111b90] border-1 border-white/10 backdrop-blur-sm rounded-2xl">
+  <div class="justify-self-center flex items-center gap-2">
+    <button class="hover:scale-125 hover:-translate-y-2 transition-all duration-400" onclick="openPopup('PopupBrave')">
+      <BraveIcon width={28} height={28} />
+    </button>
+    <button class="hover:scale-125 hover:-translate-y-2 transition-all duration-400" onclick="openPopup('PopupFileExplorer')">
+      <FolderIcon width={28} height={28} />
+    </button>
+    <button class="hover:scale-125 hover:-translate-y-2 transition-all duration-400" onclick="openPopup('PopupTerminal')">
+      <TerminalIcon width={28} height={28} />
+    </button>
   </div>
 </nav>
 
+<style is:global>
+  @keyframes jump-top-in {
+    0% {
+      opacity: 0.75;
+      scale: 0.75;
+      transform: translateY(50px);
+    }
+    50% {
+      opacity: 0.75;
+      scale: 0.75;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  .animate-jump-top-in {
+    animation: jump-top-in 0.5s ease;
+  }
+
+  @keyframes jump-bottom-out {
+    0% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+      scale: 0;
+      transform: translateY(-50px);
+    }
+  }
+
+  .animate-jump-bottom-out {
+    animation: jump-bottom-out 0.5s ease forwards;
+  }
+</style>
+
 <script is:inline>
-  function openPopup(dialogToOpen) {
+  function checkSystemOpenPopups() {
     const systemDialogsToClose = document.getElementsByTagName("dialog");
 
     Array.from(systemDialogsToClose).forEach((dialog) => {
@@ -58,16 +66,14 @@ import PopupSystemWiFi from "./system-popups/PopupSystemWiFi.astro";
 
       dialog.close(dialog.id);
     });
+  }
 
-    document.getElementById(dialogToOpen).show();
+  function openPopup(dialogToOpen) {
+    checkSystemOpenPopups();
+    
+    const dialogOpen = document.getElementById(dialogToOpen);
+    dialogOpen.show();
+
+    checkOpenPopups();
   };
 </script>
-
-<PopupBrave />
-<PopupTerminal />
-
-<PopupSystemMusic />
-<PopupSystemBattery />
-<PopupSystemUserActions />
-<PopupSystemApps />
-<PopupSystemWiFi />

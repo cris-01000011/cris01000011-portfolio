@@ -1,22 +1,21 @@
 ---
 import CrossIcon from "../../src/assets/svgs/cross-small-svgrepo-com.svg"
-const { id, title, width="w-[calc(100%-40px)]", height="h-[90%]" } = Astro.props;
+const { id, title, width="w-full lg:w-[calc(100%-20px)]", height="h-full lg:h-[94%]", direction="top-0 lg:top-8 left-0 lg:left-2" } = Astro.props;
 ---
 
-<dialog id={id} class={`fixed bottom-16 ${width} ${height} left-5 bg-inherit`}>
-  <div class="animate-fade absolute w-full h-full bg-white/40 border border-black/5 backdrop-blur-[5px] shadow-md rounded-xl overflow-hidden">
-    <div id={"PopupBrave2"} class="header relative flex items-center justify-end px-2 w-full h-[25px] bg-black/5 rounded-t-xl cursor-move">
-      <span class="absolute top-0 left-0 text-black/50 px-2">{title}</span>
-      <form method="dialog">
-        <button type="submit" class="flex items-center">
+<dialog id={id} class={`fixed ${direction} ${width} ${height} bg-inherit rounded-xl`}>
+  <div class="animate-fade absolute w-full h-full bg-[rgba(17,17,27,0.95)] text-[#cdd6f4] lg:border-1 lg:border-[#cba6f7] backdrop-blur-sm lg:rounded-xl overflow-hidden">
+    <div class="header relative flex items-center justify-end px-2 w-full h-[25px] rounded-t-xl cursor-move">
+      <span class="absolute top-0 left-0 px-2">{title}</span>
+      <div>
+        <button onclick="closePopup(this)" class="flex items-center">
           <CrossIcon width={20} height={20} />
         </button>
-      </form>
+      </div>
     </div>
 
     <slot />
 
-    <!-- Botón de esquina inferior derecha -->
     <div class="resize-handle absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"></div>
   </div>
 </dialog>
@@ -24,17 +23,32 @@ const { id, title, width="w-[calc(100%-40px)]", height="h-[90%]" } = Astro.props
 <style>
   @keyframes fade {
     from {
-      opacity: 0;
-      transform: translateY(50px);
+    opacity: 0;
+      transform: scale(0, 0);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(100px, 100px);
     }
   }
 
   .animate-fade {
-    animation: fade 0.25s linear;
+    animation: fade 0.15s ease-in-out;
+  }
+
+  @keyframes fade-out {
+    0% {
+      opacity: 0.2;
+      transform: scale(0.1, 0.1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0, 0);
+    }
+  }
+
+  .animate-fade-out {
+    animation: fade-out 0.25s ease-in-out;
   }
 
   dialog::backdrop {
@@ -42,70 +56,57 @@ const { id, title, width="w-[calc(100%-40px)]", height="h-[90%]" } = Astro.props
   }
 </style>
 
-<script>
-  const dialogs = document.getElementsByTagName("dialog");
+<script is:inline>
+  function checkOpenPopups() {
+    const dialogs = Array.from(document.getElementsByTagName("dialog"));
+    const openDialogs = dialogs.filter(dialog => dialog.open);
 
-  Array.from(dialogs).forEach((dialog) => {
-    const header = dialog.querySelector<HTMLElement>(".header");
-    const resizeHandle = dialog.querySelector<HTMLElement>(".resize-handle");
-
-    if (header) dragElement(dialog as HTMLDialogElement, header);
-    if (resizeHandle) makeResizable(dialog as HTMLDialogElement, resizeHandle);
-  });
-
-  function dragElement(elmnt: HTMLDialogElement, handle: HTMLElement) {
-    let pos1 = 0,
-      pos2 = 0,
-      pos3 = 0,
-      pos4 = 0;
-
-    handle.onmousedown = (e) => {
-      e.preventDefault();
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      document.onmouseup = closeDragElement;
-      document.onmousemove = elementDrag;
-    };
-
-    function elementDrag(e: MouseEvent) {
-      e.preventDefault();
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-      elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
-    }
-
-    function closeDragElement() {
-      document.onmouseup = null;
-      document.onmousemove = null;
-    }
+    checkIsOpenPopupsOnTop(openDialogs);
   }
 
-  function makeResizable(elmnt: HTMLDialogElement, handle: HTMLElement) {
-    let startX = 0, startY = 0, startWidth = 0, startHeight = 0;
+  function navBottomChangeAnimation(isPopupsOnTop) {
+    const navBottom = document.getElementById("navBottom");
+    navBottom.classList.remove("animate-jump-bottom-out");
 
-    handle.addEventListener("mousedown", initResize);
+    if (isPopupsOnTop) {
+      navBottom.classList.remove("animate-jump-top-in")
+      navBottom.classList.add("animate-jump-bottom-out");
 
-    function initResize(e: MouseEvent) {
-      e.preventDefault();
-      startX = e.clientX;
-      startY = e.clientY;
-      startWidth = parseInt(document.defaultView?.getComputedStyle(elmnt).width || "0", 10);
-      startHeight = parseInt(document.defaultView?.getComputedStyle(elmnt).height || "0", 10);
-      document.addEventListener("mousemove", resizeDialog);
-      document.addEventListener("mouseup", stopResize);
+      return;
     }
 
-    function resizeDialog(e: MouseEvent) {
-      elmnt.style.width = startWidth + (e.clientX - startX) + "px";
-      elmnt.style.height = startHeight + (e.clientY - startY) + "px";
-    }
+    if (!navBottom.classList.contains("animate-jump-top-in"))
+      return navBottom.classList.add("animate-jump-top-in");
+  }
 
-    function stopResize() {
-      document.removeEventListener("mousemove", resizeDialog);
-      document.removeEventListener("mouseup", stopResize);
-    }
+  function checkIsOpenPopupsOnTop(openDialogs) {
+    const bodyRectHeight = document.body.getBoundingClientRect().height;
+    const isPopupsOnTop = openDialogs.find(dialog =>
+      dialog.getBoundingClientRect().bottom > (bodyRectHeight - 52)
+    );
+
+    if (isPopupsOnTop)
+      return navBottomChangeAnimation(true);
+
+    navBottomChangeAnimation(false);
+  }
+
+  function animatePopupClose(dialog) {
+    dialog.classList.add("animate-fade-out");
+
+    dialog.addEventListener(
+      "animationend", () => {
+        dialog.close();
+        dialog.classList.remove("animate-fade-out");
+        checkOpenPopups();
+      },
+      { once: true }
+    );
+  }
+
+  function closePopup(button) {
+    const currentDialog = button.closest("dialog");
+
+    animatePopupClose(currentDialog);
   }
 </script>

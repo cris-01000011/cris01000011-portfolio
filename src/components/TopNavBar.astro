@@ -1,0 +1,129 @@
+---
+import HomeSVG from "../assets/svgs/home-svgrepo-com.svg";
+import VolumeMaxSVG from "../assets/svgs/volume-max-svgrepo-com.svg";
+import NextMusicSVG from "../assets/svgs/play-next-svgrepo-com.svg";
+import PlayMusicSVG from "../assets/svgs/play-svgrepo-com.svg";
+import PauseMusicSVG from "../assets/svgs/pause-svgrepo-com.svg";
+import PowerSVG from "../assets/svgs/power-svgrepo-com.svg";
+import WifiSVG from "../assets/svgs/wifi-svgrepo-com.svg";
+import BluetoothSVG from "../assets/svgs/bluetooth-svgrepo-com.svg";
+import TerminalSVG from "../assets/svgs/terminal-2-svgrepo-com.svg";
+import DateSVG from "../assets/svgs/date-range-svgrepo-com.svg";
+import TimeSVG from "../assets/svgs/time-svgrepo-com.svg";
+---
+
+<nav class="hidden z-1 fixed top-0 lg:grid grid-cols-3 bg-black/75 w-full backdrop-blur-xl text-sm text-[#cdd6f4] border-b-1 border-b-[#cba6f7]">
+  <div class="flex items-center gap-2 w-full h-full">
+    <button onclick="openPopup('PopupSystemApps')" class="bg-[#313244] w-fit h-full px-2 py-[2px]">
+      <HomeSVG width={12} height={12} />
+    </button>
+    <button onclick="openPopup('PopupTerminal')" class="bg-[#45475a] w-fit px-1 py-[2px] rounded">
+      <TerminalSVG width={12} height={12} />
+    </button>
+    <button onclick="openPopup('PopupSystemMusic')" class="bg-[#45475a] w-fit px-1 py-[2px] rounded">
+      <VolumeMaxSVG width={12} height={12} />
+    </button>
+    <div id="waveOff" class="self-bottom border-b-1 border-b-[#cbc6f7] w-16 h-[10px]"></div>
+    <div hidden id="waveOn" class="flex items-end h-[10px]">
+      <div class="origin-bottom animate-[wave_1s_ease_0.0s_infinite] bg-[#cbc6f7] w-2 h-[80%]"></div>
+      <div class="origin-bottom animate-[wave_1s_ease_0.25s_infinite] bg-[#cbc6f7] w-2 h-[70%]"></div>
+      <div class="origin-bottom animate-[wave_1s_ease_0.5s_infinite] bg-[#cbc6f7] w-2 h-[60%]"></div>
+      <div class="origin-bottom animate-[wave_1s_ease_0.1s_infinite] bg-[#cbc6f7] w-2 h-[50%]"></div>
+      <div class="origin-bottom animate-[wave_1s_ease_0.0s_infinite] bg-[#cbc6f7] w-2 h-[80%]"></div>
+      <div class="origin-bottom animate-[wave_1s_ease_0.5s_infinite] bg-[#cbc6f7] w-2 h-[70%]"></div>
+      <div class="origin-bottom animate-[wave_1s_ease_0.25s_infinite] bg-[#cbc6f7] w-2 h-[60%]"></div>
+      <div class="origin-bottom animate-[wave_1s_ease_0.0s_infinite] bg-[#cbc6f7] w-2 h-[80%]"></div>
+    </div>
+    <button onclick="prevTrack()">
+      <NextMusicSVG class={"scale-x-[-1]"} width={12} height={12} />
+    </button>
+    <button id="playMusicBtn" onclick="playMusic()">
+      <PlayMusicSVG width={12} height={12} />
+    </button>
+    <button id="pauseMusicBtn" hidden onclick="playMusic()">
+      <PauseMusicSVG width={12} height={12} />
+    </button>
+    <button onclick="nextTrack()">
+      <NextMusicSVG width={12} height={12} />
+    </button>
+  </div>
+
+  <div class="flex items-center justify-center gap-1 w-full text-[#b4befe]">
+    <DateSVG width={14} height={14} />
+    <span>30/10/2004</span>
+    <span class="mx-2">-</span>
+    <TimeSVG width={14} height={14} />
+    <span>11:00</span>
+  </div>
+
+  <div class="flex flex-row gap-2 items-center justify-end w-full py-[2px] pr-1">
+    <button onclick="openPopup('PopupSystemBluetooth')" class="flex items-center gap-2 bg-[#89b4fa] w-fit px-5 py-[2px] rounded">
+      <BluetoothSVG width={12} height={12} />
+    </button>
+    <button onclick="openPopup('PopupSystemWiFi')" class="flex items-center gap-2 bg-[#94e2d5] w-fit px-5 py-[2px] rounded">
+      <WifiSVG width={12} height={12} />
+    </button>
+    <button onclick="openPopup('PopupSystemUserActions')" class="bg-[#f38ba8] p-[2px] rounded-full">
+      <PowerSVG width={12} height={12} />
+    </button>
+  </div>
+</nav>
+
+<style>
+@keyframes wave {
+  0% {
+    transform: scaleY(0.2);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.2);
+  }
+}
+</style>
+<script is:inline>
+  function changeMusicIcons(isPaused) {
+    const playMusicBtn = document.getElementById("playMusicBtn");
+    const pauseMusicBtn = document.getElementById("pauseMusicBtn");
+
+    const systemPlayMusicBtn = document.getElementById("systemPlayMusicBtn");
+    const systemPauseMusicBtn = document.getElementById("systemPauseMusicBtn");
+
+    const waveOff = document.getElementById("waveOff");
+    const waveOn = document.getElementById("waveOn");
+
+    if (isPaused) {
+      playMusicBtn.hidden = true;
+      pauseMusicBtn.hidden = false;
+
+      systemPlayMusicBtn.hidden = true;
+      systemPauseMusicBtn.hidden = false;
+
+      waveOff.hidden = true;
+      waveOn.hidden = false;
+      return;
+    }
+
+    playMusicBtn.hidden = false;
+    pauseMusicBtn.hidden = true;
+
+    systemPlayMusicBtn.hidden = false;
+    systemPauseMusicBtn.hidden = true;
+
+    waveOff.hidden = false;
+    waveOn.hidden = true;
+  }
+
+  function playMusic() {
+    const audio = document.getElementById("audioPlaylist");
+    const isPaused = audio.paused;
+
+    changeMusicIcons(isPaused);
+
+    if (isPaused)
+      return audio.play();
+
+    audio.pause();
+  }
+</script>

@@ -1,0 +1,22 @@
+---
+import SystemModal from "../SystemModal.astro";
+
+import BluetoothSVG from "../../assets/svgs/bluetooth-2-svgrepo-com.svg";
+---
+
+<SystemModal id="PopupSystemBluetooth" openDirection="top-8 right-2" width="w-auto">
+  <div
+    class="relative flex flex-col gap-3 px-2 py-1"
+  >
+    <div class="flex items-center justify-between w-full">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center w-7 h-7 rounded-md">
+          <BluetoothSVG width={24} height={24} />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[#cdd6f4] font-medium text-sm">Bluetooth</span>
+          <span class="text-[#a6adc8] text-xs opacity-80">On</span>
+        </div>
+      </div>
+  </div>
+</SystemModal>

@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import LogoImg from "../assets/imgs/icon256x256.png";
+---
+
+<div id="lockScreen" class="fixed top-0 left-0 bg-[#313244dd] backdrop-blur-2xl w-full h-full z-2">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-4 text-center">
+
+    <Image class="w-32 h-32 rounded-full border-2 border-[#cba6f7]/40 shadow-lg" src={LogoImg} alt="logo" />
+
+    <span class="text-[#cdd6f4] text-2xl tracking-wide">Cris</span>
+
+    <button 
+      onclick="login()" 
+      class="bg-[#cba6f7] hover:bg-[#b28dee] text-[#313244] w-32 py-1 rounded-md transition-all duration-300 shadow-sm hover:shadow-md">
+      Login
+    </button>
+
+    <div class="flex items-center gap-2 mt-2 bg-[#1e1e2e]/40 px-3 py-2 rounded-md border border-[#45475a]">
+      <input
+        checked
+        type="checkbox" 
+        id="fullscreen" 
+        name="fullscreen" 
+        value="fullscreen"
+        class="appearance-none w-4 h-4 border-2 border-[#cba6f7]/60 rounded-sm bg-transparent cursor-pointer transition-all duration-200 checked:bg-[#cba6f7] checked:border-[#cba6f7] focus:outline-none focus:ring-2 focus:ring-[#cba6f7]/50"
+      />
+      <label for="fullscreen" class="flex items-center gap-2 text-[#bac2de] text-sm select-none cursor-pointer">
+        Fullscreen <span class="hidden lg:flex opacity-60">(recommended)</span>
+      </label>
+    </div>
+
+  </div>
+</div>
+
+<style>
+@keyframes blur {
+  to {
+    backdrop-filter: blur(0);
+    opacity: 0;
+  }
+}
+
+.animate-blur {
+  animation: blur 0.5s ease-in-out forwards;
+}
+</style>
+
+<script is:inline>
+function login() {
+  const lockScreen = document.getElementById("lockScreen");
+  const fullscreen = document.getElementById("fullscreen");
+
+  if (fullscreen.checked && document.documentElement.requestFullscreen)
+    document.documentElement.requestFullscreen();
+
+  lockScreen.classList.add("animate-blur");
+  lockScreen.addEventListener("animationend", () => {
+    lockScreen.hidden = true;
+    lockScreen.classList.remove("animate-blur");
+  }, { once: true });
+}
+</script>

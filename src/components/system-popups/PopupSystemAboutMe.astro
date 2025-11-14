@@ -1,0 +1,32 @@
+---
+import SystemModal from "../SystemModal.astro";
+
+import FolderSVG from "../../assets/svgs/folder-2-svgrepo-com.svg";
+import FileSVG from "../../assets/svgs/file-user-svgrepo-com.svg";
+import FilePdfSVG from "../../assets/svgs/pdf-svgrepo-com.svg";
+---
+
+<SystemModal id="PopupSystemAboutMe" openDirection="top-1/2 left-1/2 -translate-1/2" width="w-[250px]" background="bg-black/25">
+  <div class="flex flex-col pr-1 w-full h-full text-[#bac2de]">
+    <button onclick="openPopup('PopupFileExplorer')" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+      <FolderSVG width={24} height={24} />
+      Projects
+    </button>
+    <button onclick="openPopup('PopupAboutMe')" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+      <FileSVG width={24} height={24} />
+      About Me.pdf
+    </button>
+    <button onclick="openPopup('PopupExperience')" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+      <FileSVG width={24} height={24} />
+      Experience.pdf
+    </button>
+    <a href="/files/CV_CristopherRamirez_2025_EN.pdf" target="_blank" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+      <FilePdfSVG width={24} height={24} />
+      CV (EN).pdf
+    </a>
+    <a href="/files/CV_CristopherRamirez_2025.pdf" target="_blank" class="flex items-center gap-2 hover:bg-[#45475a] text-sm px-1 py-1 rounded-xs w-full">
+      <FilePdfSVG width={24} height={24} />
+      CV (ES).pdf
+    </a>
+  </div>
+</SystemModal>

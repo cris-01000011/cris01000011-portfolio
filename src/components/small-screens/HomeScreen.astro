@@ -1,0 +1,35 @@
+---
+import FolderIcon from "../../assets/svgs/folder-2-svgrepo-com.svg";
+import FolderFavouriteIcon from "../../assets/svgs/folder-favourite-star-svgrepo-com.svg";
+import BraveIcon from "../../assets/svgs/brave-svgrepo-com.svg";
+import TerminalIcon from "../../assets/svgs/terminal-svgrepo-com.svg";
+import DesktopIcon from "../../assets/svgs/desktop-svgrepo-com.svg";
+---
+
+<div class="lg:hidden fixed top-1/2 left-[15%] -translate-y-[55%] w-screen h-screen flex items-center ">
+  <div class="flex flex-col gap-2 pr-1 text-[#bac2de]">
+    <span class="bg-[#11111baa] text-2xl backdrop-blur-xs flex items-center pl-2 pr-5 py-2 gap-2 px-1 py-1 rounded-sm w-full">
+      11:00
+    </span>
+    <button onclick="openPopup('PopupBrave')" class="bg-[#11111baa] backdrop-blur-xs flex items-center pl-2 pr-5 py-2 gap-2 px-1 py-1 rounded-sm w-full">
+      <BraveIcon width={24} height={24} />
+      Brave
+    </button>
+    <button onclick="openPopup('PopupTerminal')" class="bg-[#11111baa] backdrop-blur-xs flex items-center pl-2 pr-5 py-2 gap-2 px-1 py-1 rounded-sm w-full">
+      <TerminalIcon width={24} height={24} />
+      Terminal
+    </button>
+    <button onclick="openPopup('PopupFileExplorer')" class="bg-[#11111baa] backdrop-blur-xs flex items-center pl-2 pr-5 py-2 gap-2 px-1 py-1 rounded-sm w-full">
+      <FolderIcon width={24} height={24} />
+      File Explorer
+    </button>
+    <button onclick="openPopup('PopupDesktop')" class="bg-[#11111baa] backdrop-blur-xs flex items-center pl-2 pr-5 py-2 gap-2 px-1 py-1 rounded-sm w-full">
+      <DesktopIcon width={24} height={24} />
+      Desktop
+    </button>
+    <button onclick="openPopup('PopupSystemAboutMe')" class="bg-[#11111baa] backdrop-blur-xs flex items-center pl-2 pr-5 py-2 gap-2 px-1 py-1 rounded-sm w-full mt-5">
+      <FolderFavouriteIcon width={24} height={24} />
+      About Me
+    </button>
+  </div>
+</div>

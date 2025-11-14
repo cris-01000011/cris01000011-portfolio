@@ -1,55 +1,122 @@
 ---
+import { Image } from "astro:assets";
 import Modal from "../Modal.astro";
+
+import Photo from "../../assets/imgs/photo.jpg";
 import CopySVG from "../../assets/svgs/copy-svgrepo-com.svg";
+import LinkedInSVG from "../../assets/svgs/linkedin-2-svgrepo-com.svg";
+import GitHubSVG from "../../assets/svgs/github-142-2-svgrepo-com.svg";
 ---
 
-<Modal id="PopupAboutMe" title="File Reader: About Me.txt" width="w-[calc(100%-40px)] lg:w-[500px]" height="h-[90%] lg:h-[370px]">
-  <div class="flex flex-col gap-3 text-black/50 p-2">
-    <p><b>Area:</b> Web development</p>
-    <p><b>Main Stack:</b> React, Astro, Tailwind, ExpresJS</p>
-    <p><b>Soft Skills:</b> Self-taught, autonomous, proactivity</p>
-    <p><b>Code Editor:</b> Neovim (NvChad distribution)</p>
-    <p><b>Learning:</b> Rust</p>
-    <p><b>Hobbies:</b> Football, retro videogames</p>
-    <hr class="text-black/25">
-    <p><b>LinkedIn:</b> <a href="www.linkedin.com/in/cris01000011" class="underline">cris01000011</a></p>
-    <p><b>GitHub:</b> <a href="https://github.com/cris-01000011" class="underline">cris-01000011</a></p>
-    <p class="flex flex-row items-center gap-2"><b>Email:</b>
-      cris.01000011@gmail.com
-      <button id="copyEmailBtn" type="button" class="active:bg-black/5 rounded"><CopySVG width={24} height={24} /></button>
-      <span hidden id="copySpan" class="animate-copy">Copied!</span>
-    </p>
+<Modal
+  id="PopupAboutMe"
+  title="File Reader: About Me.pdf"
+  width="w-full lg:w-[590px]"
+  height="h-full lg:h-[530px]"
+  direction="lg:top-1/2 lg:left-1/2 lg:-translate-1/2"
+>
+  <div class="flex flex-col items-center gap-4 px-6 py-4 text-[#cdd6f4] font-[Inter,sans-serif]">
+
+    {/* photo */}
+    <div class="relative">
+      <Image
+        src={Photo}
+        class="w-32 h-32 rounded-full border-2 border-[#b4befe] object-cover grayscale-25"
+        alt="photo"
+      />
+      <div class="absolute inset-0 rounded-full bg-gradient-to-t from-[#1e1e2e]/50 to-transparent"></div>
+    </div>
+
+    {/* name */}
+    <div class="text-center">
+      <h2 class="text-xl font-semibold tracking-wide text-[#b4befe]">Cristopher Ramirez</h2>
+      <p class="text-sm text-[#a6adc8]">Web Developer</p>
+    </div>
+
+    <hr class="border-[#585b70] w-full opacity-60" />
+
+    {/* about me */}
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-3 w-full text-sm">
+      <div class="flex flex-col gap-1">
+        <p><span class="font-semibold text-[#b4befe]">About Me</p>
+        <p>I like programming because it allows me to create things from scratch and have control of the design and functionalities. Additionally, I like to understand how the technologies we use every day work and share that knowledge, whether with people in the tech world or people outside of it.</p>
+      </div>
+      <div class="flex flex-col gap-1">
+        <p><span class="font-semibold text-[#b4befe]">Area:</span> Web Development</p>
+        <p><span class="font-semibold text-[#b4befe]">Main Stack:</span> React, Astro, Tailwind, ExpressJS</p>
+        <p><span class="font-semibold text-[#b4befe]">Soft Skills:</span> Self-taught, Autonomous, Proactive</p>
+        <p><span class="font-semibold text-[#b4befe]">Favorite Code Editor:</span> Neovim (NvChad)</p>
+        <p><span class="font-semibold text-[#b4befe]">Hobbies:</span> Football, Retro Videogames</p>
+        <p><span class="font-semibold text-[#b4befe]">Learning:</span> Rust</p>
+      </div>
+    </div>
+
+    <hr class="border-[#585b70] w-full opacity-60" />
+
+    {/* contact */}
+    <div class="relative flex flex-col items-start gap-1 w-full text-sm">
+      <div class="flex items-center gap-2 mt-1 mb-2 lg:mb-0">
+        <span class="font-semibold text-[#b4befe]">Email:</span>
+        <span class="select-all">cris.01000011@gmail.com</span>
+        <button id="copyEmailBtn" type="button" class="">
+          <CopySVG width={18} height={18} />
+        </button>
+        <span id="copySpan" hidden class="text-xs text-[#a6e3a1] animate-copy">Copied!</span>
+      </div>
+
+      <div class="hidden absolute top-1/2 -translate-y-1/2 right-0 lg:flex flex-row gap-3">
+        <a href="https://github.com/cris-01000011" class="bg-[#b4befe] text-[#313244] flex flex-row items-center px-2 rounded gap-2">
+          <GitHubSVG width={16} height={16} />
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/cris01000011" class="bg-[#b4befe] text-[#313244] flex flex-row items-center px-2 rounded gap-2">
+          <LinkedInSVG width={16} height={16} />
+          <span>LinkedIn</span>
+        </a>
+      </div>
+
+      <div class="lg:hidden flex flex-row gap-3">
+        <a href="https://github.com/cris-01000011" class="bg-[#b4befe] text-[#313244] flex flex-row items-center px-2 rounded gap-2">
+          <GitHubSVG width={16} height={16} />
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/cris01000011" class="bg-[#b4befe] text-[#313244] flex flex-row items-center px-2 rounded gap-2">
+          <LinkedInSVG width={16} height={16} />
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </div>
+
   </div>
 </Modal>
 
 <style>
-  @keyframes copy {
-    0% {
-      transform: translateY(10px);
-    }
-    100% {
-      transform: translateY(0);
-    }
+@keyframes copy {
+  0% { 
+    opacity: 0;
   }
-
-  .animate-copy {
-    animation: copy 0.1s linear;
+  100% {
+    opacity: 1;
   }
+}
+.animate-copy {
+  animation: copy 0.2s ease-out;
+}
 </style>
 
 <script is:inline>
-  const btnCopy = document.getElementById("copyEmailBtn");
-  const spanCopied = document.getElementById("copySpan");
-  const email = "cris.01000011@gmail.com";
+const btnCopy = document.getElementById("copyEmailBtn");
+const spanCopied = document.getElementById("copySpan");
+const email = "cris.01000011@gmail.com";
 
-  btnCopy?.addEventListener("click", async () => {
-    await navigator.clipboard.writeText(email);
-    btnCopy.hidden = true;
-    spanCopied.hidden = false;
-
-    setTimeout(() => {
-      btnCopy.hidden = false;
-      spanCopied.hidden = true;
-    }, 400)
-  });
+btnCopy?.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(email);
+  btnCopy.hidden = true;
+  spanCopied.hidden = false;
+  setTimeout(() => {
+    btnCopy.hidden = false;
+    spanCopied.hidden = true;
+  }, 600);
+});
 </script>
+

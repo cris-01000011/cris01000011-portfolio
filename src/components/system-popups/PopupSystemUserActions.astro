@@ -1,11 +1,72 @@
 ---
+import { Image } from "astro:assets";
+
 import SystemModal from "../SystemModal.astro";
+
+import SystemImg from "../../assets/imgs/wallpapers/cat-vibin.png";
+
+import PowerSVG from "../../assets/svgs/power-off-2-svgrepo-com.svg";
+import PowerHoverSVG from "../../assets/svgs/power-off-svgrepo-com.svg";
+import RebootSVG from "../../assets/svgs/system-reboot-svgrepo-com.svg";
+import RebootHoverSVG from "../../assets/svgs/system-reboot-2-svgrepo-com.svg";
+import LockSVG from "../../assets/svgs/lock-keyhole-svgrepo-com.svg";
+import LockHoverSVG from "../../assets/svgs/lock-keyhole-2-svgrepo-com.svg";
 ---
 
-<SystemModal id="PopupSystemUserActions" openDirection="left-5" width="w-[125px]">
-  <div class="flex flex-col w-full h-full">
-    <button class="flex items-start hover:bg-black/5 px-2 py-1 rounded w-full">Power Off</button>
-    <button class="flex items-start hover:bg-black/5 px-2 py-1 rounded w-full">Log Out</button>
-    <button class="flex items-start hover:bg-black/5 px-2 py-1 rounded w-full">Suspend</button>
+<SystemModal id="PopupSystemUserActions" openDirection="left-1/2 -translate-1/2 top-1/2" width="w-auto" background="bg-black/25">
+  <div class="w-94 h-52 rounded-t-xl border-1 border-[#313244] mb-2">
+    <Image class={"w-full h-full object-cover rounded-t-xl"} src={SystemImg} alt={"system-image"} />
+  </div>
+  <div class="flex flex-row gap-2 w-full h-full">
+    <button onclick="power()" class="group bg-[rgba(49,50,68,0.5)] hover:bg-[#cba6f7] flex items-center justify-center py-2 rounded w-full">
+      <PowerSVG class={"group-hover:hidden"} width={24} height={24} />
+      <PowerHoverSVG class={"hidden group-hover:block"} width={24} height={24} />
+    </button>
+    <button onclick="reboot()" class="group bg-[rgba(49,50,68,0.5)] hover:bg-[#cba6f7] flex items-center justify-center py-2 rounded w-full">
+      <RebootSVG class={"group-hover:hidden"} width={24} height={24} />
+      <RebootHoverSVG class={"hidden group-hover:block"} width={24} height={24} />
+    </button>
+    <button onclick="lock()" class="group bg-[rgba(49,50,68,0.5)] hover:bg-[#cba6f7] flex items-center justify-center py-2 rounded w-full">
+      <LockSVG class={"group-hover:hidden"} width={24} height={24} />
+      <LockHoverSVG class={"hidden group-hover:block"} width={24} height={24} />
+    </button>
   </div>
 </SystemModal>
+
+<style is:global>
+@keyframes blur-out {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-blur-out {
+  animation: blur-out 0.5s ease-in-out forwards;
+}
+</style>
+
+<script is:inline>
+function power() {
+  const powerOff = document.getElementById("powerOff");
+  powerOff.hidden = false;
+
+  lock();
+}
+
+function reboot() {
+  location.reload();
+}
+
+function lock() {
+  const lockScreen = document.getElementById("lockScreen");
+  lockScreen.hidden = false;
+  lockScreen.classList.add("animate-blur-out");
+
+  lockScreen.addEventListener("animationend", () => {
+    lockScreen.classList.remove("animate-blur-out");
+  }, { once: true })
+}
+</script>

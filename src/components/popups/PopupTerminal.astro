@@ -1,28 +1,56 @@
 ---
 import Modal from "../Modal.astro";
-import Greatherthan from "../../assets/svgs/greaterthan-svgrepo-com.svg";
-import AsciiTerminalArt from "../AsciiTerminalArt.astro";
 ---
 
-<Modal id="PopupTerminal" title="Terminal" width="w-[356px]" height="h-[415px]" >
-  <div class="font-big-blue text-black/50 flex flex-col w-full min-h-[100%-41px]">
-    <AsciiTerminalArt />
-    <span class="text-2xl text-center p-2">CheatSheet</span>
-    <div class="flex flex-col items-center justify-center gap-2 w-full h-full p-2">
-      <div class="flex flex-col w-fit border-1 border-dashed p-2">
-        <span>- Background</span>
-        <span>set bg-animate [on / off]</span>
+<Modal id="PopupTerminal" title="Terminal" height="h-full lg:h-[680px]" >
+  <div class="font-big-blue text-[#cdd6f4] flex flex-col w-full min-h-[100%-41px]">
+    <div class="text-center text-[#89b4fa] text-xl mb-2">CHEATSHEET</div>
+    <div class="grid grid-cols-2 gap-2 p-4">
+      <div class="flex flex-col items-center bg-[rgba(49,50,68,0.5)] text-[#313244] text-sm w-full h-50">
+        <span class="bg-[#94e2d5] px-2 h-fit mb-4">System</span>
+        <div class="grid grid-cols-2 w-full px-5 text-[#bac2de]">
+          <div class="w-full">
+            <span>exit</span>
+          </div>
+          <div class="flex justify-end w-full">
+            <span>close terminal</span>
+          </div>
+        </div>
       </div>
-      <div class="flex flex-col w-fit border-1 border-dashed p-2">
-        <span>- System</span>
-        <span>run [program_name]</span>
-        <span>exit</span>
+
+      <div class="flex flex-col items-center bg-[rgba(49,50,68,0.5)] text-[#313244] text-sm w-full h-50">
+        <span class="bg-[#f9e2af] px-2 h-fit mb-4">Apparence</span>
+        <div class="grid grid-cols-2 w-full px-5 text-[#bac2de]">
+          <div class="flex flex-col w-full">
+            <span>set bg-animate on</span>
+            <span>set bg-animate off</span>
+          </div>
+          <div class="flex flex-col text-end w-full">
+            <span>animate bg</span>
+            <span>animate bg off</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center bg-[rgba(49,50,68,0.5)] text-[#313244] text-sm w-full h-50">
+        <span class="bg-[#eba0ac] px-2 h-fit mb-4">Programs</span>
+        <div class="grid grid-cols-2 w-full px-5 text-[#bac2de]">
+          <div class="w-full">
+            <span>run [options]</span>
+          </div>
+          <div class="flex flex-col text-end w-full">
+            <span>Brave</span>
+            <span>FileExplorer</span>
+            <span>Desktop</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="absolute bottom-0 flex items-center bg-white/50 gap-2 w-full h-[32px] px-2 py-1 border-t-1 border-t-black/25">
-      <Greatherthan width={16} height={16} />
-      <form onsubmit="RunCommand(event)">
-        <input autofocus id="terminalInput" type="text" class="outline-0 flex-1" spellcheck="false" autocomplete="off">
+
+    <div class="absolute bottom-4 left-0 flex items-center w-full px-4">
+      <span class="bg-[#cba6f7] text-[#313244] border-1 border-[#cba6f7] px-2">Command</span>
+      <form onsubmit="RunCommand(event)" class="w-full border-y border-r border-[#cba6f7]">
+        <input autofocus id="terminalInput" type="text" class="outline-0 flex-1 w-full ml-2" spellcheck="false" autocomplete="off">
       </form>
     </div>
   </div>
@@ -36,14 +64,15 @@ function RunCommand(event) {
   const command = input.value.trim();
   input.value = "";
 
+  const terminal = document.getElementById("PopupTerminal");
   if (command === "exit")
-    return document.getElementById("PopupTerminal").close();
+    return closePopup(terminal);
 
+  const bgGif = document.getElementById("bgGif");
   if (command === "set bg-animate on")
-    return document.body.style.backgroundImage = "url(/imgs/ff.gif)";
-
+    return bgGif.hidden = false;
   if (command === "set bg-animate off")
-    return document.body.style.backgroundImage = "url(/imgs/ff.png)";
+    return bgGif.hidden = true;
 
   const program = command.slice(4).trim();
   const modal = document.getElementById("Popup" + program);
