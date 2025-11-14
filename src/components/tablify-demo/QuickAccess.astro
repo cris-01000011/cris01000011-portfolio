@@ -25,7 +25,7 @@ const quickAccess = [
 <div class="col-span-2 lg:col-span-1 border-2 border-[rgba(49,50,68,0.9)] w-full h-full p-2 rounded-2xl">
   <InputSearch />
 
-  <div class="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-1 place-items-center max-h-[calc(100vh-135px)] overflow-y-auto scroll-hide mt-2">
+  <div class="flex flex-row gap-2 place-items-center max-h-[calc(100vh-135px)] overflow-y-auto scroll-hide mt-2">
     {quickAccess.map((qa) => (
       <a
         href={qa.url}
