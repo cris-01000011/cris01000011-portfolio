@@ -106,7 +106,7 @@ const tracks = [
 
   <div class="text-center text-[#7f849c] text-xs">Favorite Game OST</div>
 
-  <audio hidden src="/music/1. Dearly Beloved.flac" controls id="audioPlaylist"></audio>
+  <audio hidden src="/music/1. Dearly Beloved.mp3" controls id="audioPlaylist"></audio>
 </SystemModal>
 
 <script is:inline>
@@ -160,7 +160,7 @@ function playTrack(selectedButton) {
   const titleSpan = selectedButton.querySelector("span:first-child");
   const trackTitle = titleSpan.textContent.trim();
 
-  audio.src = `/music/${trackTitle}.flac`;
+  audio.src = `/music/${trackTitle}.mp3`;
   audio.load();
 
   changeCurrentTrack(selectedButton);
